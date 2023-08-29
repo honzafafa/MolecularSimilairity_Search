@@ -1,4 +1,5 @@
-﻿namespace Mol_convert;
+﻿namespace MolConvert;
+
 public class Class1
 {
 

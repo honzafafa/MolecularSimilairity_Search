@@ -1,5 +1,7 @@
-﻿namespace Solution{
+﻿using MolConvert;
 
+namespace Solution{
 
+    "mlfn,lentljfgnw"
 
 }
