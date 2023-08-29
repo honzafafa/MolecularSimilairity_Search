@@ -1,4 +1,20 @@
 ﻿<Properties StartupConfiguration="{D2F3DCE9-844E-4C10-84F2-139D946CA52E}|Default">
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.MolSearch FirstBuild="True" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.ItemProperties.Mol__convert FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.MolSearch PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MolSearch/Program.cs">
+    <Files>
+      <File FileName="MolSearch/Program.cs" Line="3" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MolSearch" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
