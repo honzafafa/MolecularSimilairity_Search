@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/Mol_convert.csproj",
-      "projectName": "Mol_convert",
-      "projectPath": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/Mol_convert.csproj",
+      "projectUniqueName": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/MolConvert.csproj",
+      "projectName": "MolConvert",
+      "projectPath": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/MolConvert.csproj",
       "packagesPath": "/Users/faflik/.nuget/packages/",
       "outputPath": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/",
       "projectStyle": "PackageReference",

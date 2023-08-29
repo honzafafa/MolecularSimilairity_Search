@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kfs4vD46QjjJKNFOJftPC55XD3D87LOCvfrHYFHjrubDgyUTuLe2FDUel0yr4WFjgNmg2X89HGCKgbxrWzCG0Q==",
+  "dgSpecHash": "2dtXaG+LrxRyEuytA2dgWryb01sxDtaG9rkM2/jqabugG0nqoy0LafjE5h1XWiDYgv7bDIGUQGu5BvBVVUUwoQ==",
   "success": true,
-  "projectFilePath": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/Mol_convert.csproj",
+  "projectFilePath": "/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/MolConvert.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
