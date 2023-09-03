@@ -6,14 +6,6 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "MolSearch/1.0.0": {
-        "dependencies": {
-          "MolConvert": "1.0.0"
-        },
-        "runtime": {
-          "MolSearch.dll": {}
-        }
-      },
       "MolConvert/1.0.0": {
         "runtime": {
           "MolConvert.dll": {}
@@ -22,11 +14,6 @@
     }
   },
   "libraries": {
-    "MolSearch/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "MolConvert/1.0.0": {
       "type": "project",
       "serviceable": false,

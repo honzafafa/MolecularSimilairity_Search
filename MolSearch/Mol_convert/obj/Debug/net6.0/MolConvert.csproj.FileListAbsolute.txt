@@ -1,0 +1,12 @@
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/bin/Debug/net6.0/MolConvert.deps.json
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/bin/Debug/net6.0/MolConvert.dll
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/bin/Debug/net6.0/MolConvert.pdb
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.csproj.AssemblyReference.cache
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.GeneratedMSBuildEditorConfig.editorconfig
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.AssemblyInfoInputs.cache
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.AssemblyInfo.cs
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.csproj.CoreCompileInputs.cache
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.dll
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/refint/MolConvert.dll
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.pdb
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/ref/MolConvert.dll
