@@ -10,3 +10,4 @@
 /Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/refint/MolConvert.dll
 /Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/MolConvert.pdb
 /Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/obj/Debug/net6.0/ref/MolConvert.dll
+/Users/faflik/Projects/C#/MolecularSimilairity_Search/MolSearch/Mol_convert/bin/Debug/net6.0/Testing.cs

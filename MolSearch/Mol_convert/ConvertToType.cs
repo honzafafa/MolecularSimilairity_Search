@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 using System.Security.Cryptography;
+using System.Collections;
 
 namespace ConvertToHash;
 
@@ -13,6 +11,7 @@ public class Atom
     public double X { get; set; }
     public double Y { get; set; }
     public double Z { get; set; }
+    public List<Atom> Neighbors { get; set; } = new List<Atom>();
 
     public Atom(string elementType, double x, double y, double z)
     {
@@ -20,6 +19,12 @@ public class Atom
         X = x;
         Y = y;
         Z = z;
+    }
+
+    //this method is useful for adding infomration about given neighnout to an atom
+    public void AddNeighbour(Atom atom)
+    {
+        Neighbors.Add(atom);
     }
 }
 
@@ -99,6 +104,10 @@ public class SdfParser
             var bondType = int.Parse(line.Substring(6, 3).Trim());
 
             var bond = new Bond(molecule.Atoms[atom1Index], molecule.Atoms[atom2Index], bondType);
+
+            molecule.Atoms[atom1Index].AddNeighbour(molecule.Atoms[atom2Index]);
+            molecule.Atoms[atom2Index].AddNeighbour(molecule.Atoms[atom1Index]);
+
             molecule.AddBond(bond);
         }
 
@@ -106,45 +115,29 @@ public class SdfParser
     }
 }
 
-public class PrintMolecule
-//Class exists for dedugging purposes
-// it exists to print out infomration about created molecule objects
+public class FCFPGenerator
 {
-    public int numAtoms { get; set; }
-    public int numBonds { get; set; }
-
-
-    public int[] PrintMol(string filepath)
-    // this method returns int[] with numeber of atoms and bonds in the molecules,
-    // it also pritns out the symbols of all of the atoms and types of all the bonds
-    // It exists only for debugging purposes
+    public BitArray GenerateFcfp(Molecule molecule, int radius, int length)
     {
-        SdfParser Parser = new SdfParser();
-        Molecule PrintMol = Parser.Parse(filepath);
+        BitArray fcfp = new BitArray(length);
 
-        int Acounter = 0;
-        foreach (Atom i in PrintMol.Atoms)
+        foreach (Atom atom in molecule.Atoms)
         {
-            Console.WriteLine(i.ElementType);
-            Acounter += 1;
+            string atomType = GetType(atom, molecule);
+            List<Atom> environment = GetEnvironment(atom, radius);
+            string environmentDescriptor = GetEnvironmentDescriptor(environment, molecule);
+
+            string hashInput = atomType + environmentDescriptor;
+            int hash = GetHash(hashInput);
+
+            int index = hash % length;
+            fcfp.Set(index, true);
         }
 
-        int Bcounter = 0;
-        foreach (Bond i in PrintMol.Bonds)
-        {
-            Console.WriteLine(i.BondType);
-            Bcounter += 1;
-        }
-        int[] retrieve = { Acounter, Bcounter };
-        return retrieve;
-
+        return fcfp;
     }
-}
 
-public class AtomTypingEngine
-// Purpose of this class is to create the types of atoms necessary to generate the FCFP foingerpints
-{ 
-    private string BasicAtomType(Atom atom, Molecule molecule)
+    private string GetType(Atom atom, Molecule molecule)
     // Determine basic atom type based on atomic symbol and bond types
     // returs the atom type descriptor
     {
@@ -164,93 +157,65 @@ public class AtomTypingEngine
         return descriptor;
     }
 
-    public string GetCircularTypeForAtom(Atom atom, Molecule molecule, int radius)
-    // Get the circular type for an atom at a given radius
+    private List<Atom> GetEnvironment(Atom atom, int radius)
     {
-        if (radius == 0)
+        List<Atom> environment = new List<Atom>();
+        HashSet<Atom> visited = new HashSet<Atom>();
+        Queue<Atom> queue = new Queue<Atom>();
+        int currentRadius = 0;
+
+        queue.Enqueue(atom);
+        visited.Add(atom);
+
+        while (queue.Count > 0 && currentRadius < radius)
         {
-            return BasicAtomType(atom, molecule);
-        }
+            int currentSize = queue.Count;
 
-        List<Atom> neighbors = GetNeighboringAtoms(atom, molecule);
-        var types = neighbors.Select(a => GetCircularTypeForAtom(a, molecule, radius - 1));
-
-        return string.Join(",", types.OrderBy(t => t));
-    }
-
-    public Dictionary<Atom, List<string>> GetCircularAtomTypes(Molecule molecule, int maxRadius)
-    // Assign atom types to a molecule
-    {
-        Dictionary<Atom, List<string>> circularTypes = new Dictionary<Atom, List<string>>();
-
-        foreach (var atom in molecule.Atoms)
-        {
-            List<string> atomCircularTypes = new List<string>();
-            for (int radius = 0; radius <= maxRadius; radius++)
+            for (int i = 0; i < currentSize; i++)
             {
-                atomCircularTypes.Add(GetCircularTypeForAtom(atom, molecule, radius));
+                Atom currentAtom = queue.Dequeue();
+
+                foreach (Atom neighbor in currentAtom.Neighbors)
+                {
+                    if (!visited.Contains(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        queue.Enqueue(neighbor);
+                        environment.Add(neighbor);
+                    }
+                }
             }
 
-            circularTypes[atom] = atomCircularTypes;
+            currentRadius++;
         }
 
-        return circularTypes;
+        return environment;
     }
 
-    private List<Atom> GetNeighboringAtoms(Atom atom, Molecule molecule)
-    // Get neighboring atoms for a given atom in a molecule
+    private string GetEnvironmentDescriptor(List<Atom> environment, Molecule molecule)
+    //This method creates a sorted descriptor of all the atoms in the atoms enviroment
     {
-        List<Atom> neighbors = new List<Atom>();
-        foreach (Bond bond in molecule.Bonds)
+        // Sort the atoms by their types
+        environment.Sort((a, b) => GetType(a, molecule).CompareTo(GetType(b, molecule)));
+
+        // Concatenate the atom types into a string
+        StringBuilder descriptor = new StringBuilder();
+        foreach (Atom atom in environment)
         {
-            if (bond.Atom1 == atom)
-            {
-                neighbors.Add(bond.Atom2);
-            }
-            else if (bond.Atom2 == atom)
-            {
-                neighbors.Add(bond.Atom1);
-            }
+            descriptor.Append(atom.GetType());
+            descriptor.Append('-');
         }
-        return neighbors;
-    }
-}
 
-public class FCFPGenerator
-//This class generates thš FCFP fingerint of give molecue
-{
-    //initalize new atomtyping engine
-    private AtomTypingEngine typingEngine = new AtomTypingEngine();
-
-    public List<int> GenerateFCFP(Molecule molecule, int maxRadius)
-    //Generate the final hast from the molecuel and use fingerpints with given radius
-    {
-        Dictionary<Atom, List<string>> circularTypes = typingEngine.GetCircularAtomTypes(molecule, maxRadius);
-        HashSet<int> hashes = new HashSet<int>();
-
-        int counter = 0;
-
-        foreach (List<string> typesForAtom in circularTypes.Values)
-        {
-            foreach (string type in typesForAtom)
-            {
-                int hashValue = ComputeHash(type);
-                Console.WriteLine(hashValue);
-                hashes.Add(hashValue);
-                counter += 1;
-            }
-        }
-        Console.WriteLine(counter);
-        return hashes.ToList();
+        return descriptor.ToString();
     }
 
-    private int ComputeHash(string type)
+    private int GetHash(string input)
     //This method uses the SHA256 cryptographic method to Hast the atom types
     {
         using (SHA256 sha256 = SHA256.Create())
         {
             // Convert the input string to bytes
-            byte[] bytes = Encoding.UTF8.GetBytes(type);
+            byte[] bytes = Encoding.UTF8.GetBytes(input);
 
             // Compute the hash
             byte[] hash = sha256.ComputeHash(bytes);
