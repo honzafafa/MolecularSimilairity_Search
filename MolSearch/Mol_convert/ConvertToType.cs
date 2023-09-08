@@ -8,17 +8,12 @@ public class Atom
 // this class exists to store data about given atom
 {
     public string ElementType { get; set; }
-    public double X { get; set; }
-    public double Y { get; set; }
-    public double Z { get; set; }
     public List<Atom> Neighbors { get; set; } = new List<Atom>();
 
-    public Atom(string elementType, double x, double y, double z)
+    public Atom(string elementType)
     {
         ElementType = elementType;
-        X = x;
-        Y = y;
-        Z = z;
+
     }
 
     //this method is useful for adding infomration about given neighnout to an atom
@@ -50,7 +45,7 @@ public class Molecule
     public List<Bond> Bonds { get; set; }
 
     public Molecule()
-    {
+    { 
         Atoms = new List<Atom>();
         Bonds = new List<Bond>();
     }
@@ -69,14 +64,53 @@ public class Molecule
 public class SdfParser
 // this class exist to parse sdf file into a class molecule
 {
-    public Molecule Parse(string filePath)
+    public Molecule Parse(string[] lines)
     // this method exist to parse sdf file into a class molecule
     // it returns the molecule object creating acording to the sdf file
     {
-        var molecule = new Molecule();
+        Molecule molecule = new Molecule();
 
-        // Read the file line by line
-        string[] lines = File.ReadAllLines(filePath);
+        //try
+        //{
+        //    // Extract the number of atoms and bonds from the counts line
+        //    int numAtoms = int.Parse(lines[3].Substring(0, 3).Trim());
+        //    int numBonds = int.Parse(lines[3].Substring(3, 3).Trim());
+
+        //    // Parse atoms
+        //    for (int i = 0; i < numAtoms; i++)
+        //    {
+        //        var line = lines[4 + i];  // atom lines start after the counts line
+
+        //        var symbol = line.Substring(31, 3).Trim();
+
+        //        var atom = new Atom(symbol);
+        //        molecule.AddAtom(atom);
+        //    }
+
+        //    // Parse bonds
+        //    for (int i = 0; i < numBonds; i++)
+        //    {
+        //        var line = lines[4 + numAtoms + i];  // bond lines start after the atom lines
+        //        var atom1Index = int.Parse(line.Substring(0, 3).Trim()) - 1; // -1 because indices are 1-based in SDF
+        //        var atom2Index = int.Parse(line.Substring(3, 3).Trim()) - 1;
+        //        var bondType = int.Parse(line.Substring(6, 3).Trim());
+
+        //        var bond = new Bond(molecule.Atoms[atom1Index], molecule.Atoms[atom2Index], bondType);
+
+        //        molecule.Atoms[atom1Index].AddNeighbour(molecule.Atoms[atom2Index]);
+        //        molecule.Atoms[atom2Index].AddNeighbour(molecule.Atoms[atom1Index]);
+
+        //        molecule.AddBond(bond);
+        //    }
+
+        //}
+
+        //catch
+        //{
+        //    Console.WriteLine(lines[3]);
+        //    Console.WriteLine("Retarded data");
+
+        //}
 
         // Extract the number of atoms and bonds from the counts line
         int numAtoms = int.Parse(lines[3].Substring(0, 3).Trim());
@@ -86,12 +120,10 @@ public class SdfParser
         for (int i = 0; i < numAtoms; i++)
         {
             var line = lines[4 + i];  // atom lines start after the counts line
-            var x = double.Parse(line.Substring(0, 10).Trim());
-            var y = double.Parse(line.Substring(10, 10).Trim());
-            var z = double.Parse(line.Substring(20, 10).Trim());
+
             var symbol = line.Substring(31, 3).Trim();
 
-            var atom = new Atom(symbol, x, y, z);
+            var atom = new Atom(symbol);
             molecule.AddAtom(atom);
         }
 

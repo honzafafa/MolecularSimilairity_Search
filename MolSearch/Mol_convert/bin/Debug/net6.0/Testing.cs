@@ -29,7 +29,7 @@ public class PrintMolecule
     // It exists only for debugging purposes
     {
         SdfParser Parser = new SdfParser();
-        Molecule PrintMol = Parser.Parse(filepath);
+        Molecule PrintMol = Parser.Parse(File.ReadAllLines(filepath));
 
         int Acounter = 0;
         foreach (Atom i in PrintMol.Atoms)
