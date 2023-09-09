@@ -18,14 +18,18 @@ public class LibraryReader
         string[] fileLines = File.ReadAllLines(filePath);
         List<string[]> moleculesAsLines = SplitByDelimiter(fileLines, "$$$$");
 
-        //string[] individualMolecules = fileContent.Split("$$$$");
-
         foreach (string[] moleculeLines in moleculesAsLines)
         {
             Molecule molecule = Parser.Parse(moleculeLines);
 
-            // Assuming the first line in each SDF entry is the molecule's name.
+            // Assuming the first line in each SDF entry is the molecule's name or at least unique id.
             string moleculeName = moleculeLines[0].Trim();
+
+            if (String.IsNullOrEmpty(moleculeName))
+            {
+                Console.WriteLine("One or more entries in this file lack unique identidifier (which is fine for individual molecules)");
+                moleculeName = Path.GetFileName(filePath);
+            }
 
             BitArray hash = Generator.GenerateFcfp(molecule, radius, length);
 

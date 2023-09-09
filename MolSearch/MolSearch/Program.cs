@@ -6,6 +6,10 @@ using ConvertToHash;
 using Test;
 using MolMesure;
 using LibraryProcessor;
+using Interace;
+using System.Threading.Tasks;
+using System.Reflection.Emit;
+using System.Data;
 
 namespace Solution
 {
@@ -13,8 +17,34 @@ namespace Solution
     {
         static void Main(string[] args)
         {
+
+            ApplicationInterface appInterface = new ApplicationInterface();
+            appInterface.Start();
+            Console.WriteLine("\nProcessing... Please wait.");
+            Console.WriteLine("------------------------------------------------");
+
+            LibraryReader Reader = new LibraryReader();
+            Dictionary<string, BitArray> target = Reader.Read(appInterface.TargetPath, appInterface.Radius, appInterface.Length);
+            string targetKey = target.Keys.First();
+
+            Dictionary<string, BitArray> library = Reader.Read(appInterface.LibraryPath, appInterface.Radius, appInterface.Length);
+
+            SimilarityCalculator Measure = new SimilarityCalculator();
+
+            SortedDictionary<double, string> measurments = new SortedDictionary<double, string>();
+
+            Parallel.ForEach(library.Keys,
+                currentKey =>
+                {
+                    double similarity = Measure.Tanimoto(target[targetKey], library[currentKey]);
+                    measurments[similarity] = currentKey;
+                });
+
+            foreach (double key in measurments.Keys) Console.WriteLine(key);
+
+
             ////string filepath1 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/PG5_2D.sdf";
-            string filepath2 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf";
+            //string filepath2 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf";
             //string filepath3 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Oxycodone.sdf";
             //string filepath4 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Morphine.sdf";
             //string filepath5 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Meperidine.sdf";
@@ -75,11 +105,11 @@ namespace Solution
             //Console.WriteLine("");
             //Console.WriteLine(similarity5);
 
-            LibraryReader Reader = new LibraryReader();
-            Dictionary<string, BitArray> Results = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf", 2, 4096);
+            //LibraryReader Reader = new LibraryReader();
+            //Dictionary<string, BitArray> Results = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf", 2, 4096);
+            //Dictionary<string, BitArray> Results = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 4096);
 
-
-            foreach(var key in Results.Keys) Console.WriteLine(key);
+            //foreach (var key in Results.Keys) Console.WriteLine(key);
 
             //var results = Reader.Read(filepath2, 2, 20);
 
