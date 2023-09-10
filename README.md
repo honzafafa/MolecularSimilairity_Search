@@ -8,8 +8,23 @@ The easies way is to go to run the app in you command line (bash) is to run the 
 cd /YOUR LOACTION/MolecularSimilairity_Search/MolSearch/MolSearch/bin/Debug/net6.0/
 dotnet MolSearch.dll
 ```
-The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation
-\nand that it will ask for the path to some 
+The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.\
+\
+You can of course you your own molecules and screening libraries (in the stadart sdf format) but please be sure you are comparing the same types of SDF file (for example some sdf file includes structurally uninportand hydrogens and some don't).\
+The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:
+THE TEST TARGET MOLECULES:
+```
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Fentanyl.sdf
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Morphine.sdf
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Oxycodone.sdf
+```
+THE TEST SCREENING LIBRARIES:
+```
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/20200113-L1300-FDA-approved-Drug-Library.sdf
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/20230828-L1300-FDA-approved-Drug-Library.sdf
+/YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf
+```
 
 ## Genral description of the project that was followed during its development
 
