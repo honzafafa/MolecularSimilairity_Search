@@ -1,9 +1,13 @@
 # Molecular Similairity Search
 This is a Molecular Similarity search engine, the I created for as my 2nd Semester University project
 
-## How to run the project?
+## How to run this console application?
 
-To run the project clone the whole github repo and run the __init__.cs file
+The easies way is to go to run the app in you command line (bash) is to run the following commands:
+'''
+cd /YOUR LOACTION/MolecularSimilairity_Search/MolSearch/MolSearch/bin/Debug/net6.0/
+dotnet MolSearch.dll
+'''
 
 ## Self created asignment for the project
 
