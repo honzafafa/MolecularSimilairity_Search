@@ -57,15 +57,15 @@ The app has some testing data included in its desing in the case you would want 
 ```
 You shoul be able to determine your own path of where to save the full results of the screen. The should be saved in a TEXT FILE\
 \
-**!! WARNING !!** 
-the app doesn't check if the file you are writing to already exists so if it does, expect that it will completely rewrite it or at least alter it\
+**!! WARNING !!** \
+the app doesn't check if the file you are writing to already exists so if it does, expect that it will completely rewrite it or at least alter it
 
 ### Form of the results 
 The results from the screen, will be printed to your resutls file (.txt) in following format:\
 \
 each of the molecuels in the screening library will have its unique row pritned to the results fiele\
 the row will be structured as:\
-Key: "uniques identified of the screened molecule", Value: "Similary of target and screeaned molecules measured"\
+* *Key: "uniques identified of the screened molecule", Value: "Similary of target and screeaned molecules measured"* *
 
 **That should be everything necessary for standart usage of the program :)** 
 
