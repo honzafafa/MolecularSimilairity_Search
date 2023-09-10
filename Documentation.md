@@ -83,7 +83,6 @@ Here is a list of the parts that were simplified in comparision with the cheminf
  Now I will proceed in domcumenting each of the modules present in this app, here is the list of them with decription which should be sufficient for uderstanding of the expert user.\
  \
 The program has 2 parts, main part and accomdading libries, in this list I don't distinguish in betweend them and list all of the modules on individual file level of abstaction:
-\
 ## 1. Program.cs
 ### Documentation for `Program.cs`
 
@@ -370,3 +369,8 @@ The `Test` namespace contains classes that are specifically designed for debuggi
 ### Usage:
 These classes are primarily intended for debugging and testing. To use them, instantiate the desired class and call the appropriate method, passing the file path of the molecule to be parsed or printed. 
 
+
+# FINAL COMMENTS
+Overall I found this this project quite interesting and learned a lot about cheminfomratic methods. The project might be slightly more algrothmically simple that usual, but I think that the topic of the project is iteresting enougth to justifi this change. The development of the console app went quite well and I think I am presenting here a complete solution ready to use in the ways documented here. 
+
+Jan Faflik, 10.9.2023
