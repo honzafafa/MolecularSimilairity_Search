@@ -30,7 +30,7 @@ You shoul be able to determine your own path of where to save the full results o
 \
 !! WARNING !! \
 the app doesn't check if the file you are writing to already exists so if it does, expect that it will completely rewrite it or at least alter it\
-\
+
 ## Genral description of the project that was followed during its development
 
 I am excited to propose my end-of-year project for the programming class, which focuses on developing a Chemical Structure Similarity Analysis Tool using Functional-Class Fingerprints (FCFP) and the Tanimoto coefficient as the similarity measure. The motivation behind this project is to create a tool that can be integrated into a virtual screening pipeline to help identify potential hits from a large compound library based on their similarity to known active compounds. This project aligns well with my interests in computational drug design.
