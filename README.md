@@ -4,10 +4,10 @@ This is a Molecular Similarity search engine, the I created for as my 2nd Semest
 ## How to run this console application?
 
 The easies way is to go to run the app in you command line (bash) is to run the following commands:
-'''
+```
 cd /YOUR LOACTION/MolecularSimilairity_Search/MolSearch/MolSearch/bin/Debug/net6.0/
 dotnet MolSearch.dll
-'''
+```
 
 ## Self created asignment for the project
 
