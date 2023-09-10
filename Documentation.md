@@ -76,5 +76,7 @@ the row will be structured as:\
 **Please note that the algoritms implemented were choosen to accomodate the standarts in chemoinfomratics but parts of them we simplified for the possiblity of implemtning the program in timely manner**
 
 Here is a list of the parts that were simplified in comparision with the cheminformatics standart:
-- 
+- the basic atom typing functionality:
+   - In Standart FCFP generation programmes, atom typing capabilites include charge, bond hybridization, functional groups and etc... I have choosed to no include those in my atom typing algoritm for following reason: These atomy typing cabalities are apply to many specifi case and many edge cases becouse of that they could be implemnted as extemetly lage switch so implememnting them would really be coding challenge but a date entry challenge, and so I don't think implementing them would be meaningful for the purpose of this project.
+   - I have implemeted the atom typing capability in a simpleifed manned where I take into account only the type of element and the types and count of bonds connected to it. This cactures mostly the structuraly similarities between molecules which is sufficuent for this project.
 
