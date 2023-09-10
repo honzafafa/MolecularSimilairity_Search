@@ -65,7 +65,7 @@ The results from the screen, will be printed to your resutls file (.txt) in foll
 \
 each of the molecuels in the screening library will have its unique row pritned to the results fiele\
 the row will be structured as:\
-* *Key: "uniques identified of the screened molecule", Value: "Similary of target and screeaned molecules measured"* *
+*Key: "uniques identified of the screened molecule", Value: "Similary of target and screeaned molecules measured"*
 
 **That should be everything necessary for standart usage of the program :)** 
 
