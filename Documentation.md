@@ -82,7 +82,7 @@ Here is a list of the parts that were simplified in comparision with the cheminf
  
  Now I will proceed in domcumenting each of the modules present in this app, here is the list of them with decription which should be sufficient for uderstanding of the expert user.\
  \
-The program has 2 parts, main part and accomdading libries, in this list I don't distinguish in betweend them and list all of the modules on individual file level of abstaction:
+The program has 2 parts, main part (MolSearch) and accomodating libries (Mol_Convert), in this list I don't distinguish in betweend them and list all of the modules on individual file level of abstaction:
 ## 1. Program.cs
 ### Documentation for `Program.cs`
 
