@@ -4,7 +4,7 @@ I am excited to present to you my end-of-year project for the programming class,
 
 **The primary goal of the project is to create a robust and user-friendly tool for performing chemical structure similarity analysis, of already approved drugs. So virtual screeing experiments centered about exploring similarity bewtween those drugs and theri groups can be conducted**
 
-### The main objectives of the project are:**
+### The main objectives of the project are:
 
 - Develop a class to represent molecules, with properties and methods for storing and manipulating atomic information. Implement functionality for parsing input molecular structures from supported chemical file formats (e.g., SMILES or SDF).
 
@@ -30,9 +30,9 @@ In the context of a virtual screening pipeline, this tool could be used to ident
 cd /YOUR LOACTION/MolecularSimilairity_Search/MolSearch/MolSearch/bin/Debug/net6.0/
 dotnet MolSearch.dll
 ```
-The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.\
+The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.
 
-### All of the parameters imputed** 
+### All of the parameters imputed
 - radius of enviroment of each atom, used to generated is't type
 - length (nuber of bits) of the fingerprints calculated
 - directory path to the target molecule
