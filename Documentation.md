@@ -14,10 +14,11 @@ The console app will then gude you throut the process, it will ask you to input 
 - directory path to the target molecule
 - directory path to the screening library (WARNING PLEASE make sure that each of the molecules in the screenign library has a unique identifies on the first row in the sdf file)
 - directory path to where you want to save results from you screening (should be not yet created txt file)
-\
+
 You can of course you your own molecules and screening libraries (in the stadart sdf format) but PLEASE be sure you are comparing the same types of SDF files (for example, some sdf files include structurally uninportand hydrogens and some don't).\
 The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:\
-**THE TEST TARGET MOLECULES:** 
+\
+THE TEST TARGET MOLECULES: 
 ```
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Fentanyl.sdf
