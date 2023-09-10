@@ -17,6 +17,7 @@ public class LibraryReader
 
         string[] fileLines = File.ReadAllLines(filePath);
         List<string[]> moleculesAsLines = SplitByDelimiter(fileLines, "$$$$");
+        bool statementActive = true;
 
         foreach (string[] moleculeLines in moleculesAsLines)
         {
@@ -27,7 +28,12 @@ public class LibraryReader
 
             if (String.IsNullOrEmpty(moleculeName))
             {
-                Console.WriteLine("One or more entries in this file lack unique identidifier (which is fine for individual molecules)");
+                if (statementActive)
+                {
+                    Console.WriteLine("One or more entries in this file lack unique identidifier (which is fine for individual molecules)");
+                    statementActive = false;
+                }
+               
                 moleculeName = Path.GetFileName(filePath);
             }
 

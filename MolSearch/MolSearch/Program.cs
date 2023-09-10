@@ -10,6 +10,7 @@ using Interace;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
 using System.Data;
+using System.Diagnostics.Metrics;
 
 namespace Solution
 {
@@ -19,104 +20,98 @@ namespace Solution
         {
 
             ApplicationInterface appInterface = new ApplicationInterface();
-            appInterface.Start();
+            //appInterface.Start();
             Console.WriteLine("\nProcessing... Please wait.");
             Console.WriteLine("------------------------------------------------");
 
             LibraryReader Reader = new LibraryReader();
-            Dictionary<string, BitArray> target = Reader.Read(appInterface.TargetPath, appInterface.Radius, appInterface.Length);
+
+            //Dictionary<string, BitArray> target = Reader.Read(appInterface.TargetPath, appInterface.Radius, appInterface.Length);
+            Dictionary<string, BitArray> target = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 1024);
             string targetKey = target.Keys.First();
 
-            Dictionary<string, BitArray> library = Reader.Read(appInterface.LibraryPath, appInterface.Radius, appInterface.Length);
+            //Dictionary<string, BitArray> library = Reader.Read(appInterface.LibraryPath, appInterface.Radius, appInterface.Length);
+            Dictionary<string, BitArray> library = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/20200113-L1300-FDA-approved-Drug-Library.sdf", 2, 1024);
+            //Dictionary<string, BitArray> library = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 1024);
+            string targetPath = "/Users/faflik/Desktop/Results1.txt";
+
+            //Visuals
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine();
 
             SimilarityCalculator Measure = new SimilarityCalculator();
 
-            SortedDictionary<double, string> measurments = new SortedDictionary<double, string>();
+            Dictionary<string, decimal> measurments = new Dictionary<string, decimal>();
 
-            Parallel.ForEach(library.Keys,
-                currentKey =>
+            foreach (string currentKey in library.Keys)
+            {
+                decimal similarity = Measure.Tanimoto(target[targetKey], library[currentKey]);
+                measurments[currentKey] = similarity;
+            }
+
+            int numMolecules = measurments.Keys.Count;
+            List<string> namesToPresent = new List<string>();
+            List<decimal> measurmetsToPresent = new List<decimal>();
+
+            using (StreamWriter writer = new StreamWriter(targetPath))
+            {
+                foreach (KeyValuePair<string, decimal> measurment in measurments.OrderBy(key => key.Value))
                 {
-                    double similarity = Measure.Tanimoto(target[targetKey], library[currentKey]);
-                    measurments[similarity] = currentKey;
-                });
+                    string result = "Key: " + measurment.Key + ", Value: " + measurment.Value;
 
-            foreach (double key in measurments.Keys) Console.WriteLine(key);
+                    writer.WriteLine(result);
+                    numMolecules -= 1;
 
+                    if (numMolecules < 10)
+                    {
+                        namesToPresent.Add(measurment.Key);
+                        measurmetsToPresent.Add(measurment.Value);
+                    }
+                }
+            }
 
-            ////string filepath1 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/PG5_2D.sdf";
-            //string filepath2 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf";
-            //string filepath3 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Oxycodone.sdf";
-            //string filepath4 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Morphine.sdf";
-            //string filepath5 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Meperidine.sdf";
-            //string filepath6 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Hydromorphone.sdf";
-            //string filepath7 = "/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/Opioids/Fentanyl.sdf";
+            //Present the results
 
-            ////for testing purposes
-            ////ReadFile Test = new ReadFile();
-            //// Test.Print(filepath);
+            //for (int i = (measurmetsToPresent.Count - 1); i >= 0; i--)
+            //{
+            //    Console.WriteLine("Key: {0}, Value: {1}", namesToPresent[i], measurmetsToPresent[i]);
+            //}
 
-            ////for testing purposes
-            ////PrintMolecule Print = new PrintMolecule();
-            ////int[] retrive = Print.PrintMol(filepath);
-            ////foreach(int i in retrive) Console.WriteLine(i);
+            DisplayTable(namesToPresent, measurmetsToPresent);
+        }
 
-            ////Create new sdf parser
-            //SdfParser Parser = new SdfParser();
+        static void DisplayTable(List<string> names, List<decimal> similarities)
+        {
 
-            ////Read 2 molecules into a molecule object
-            //Molecule Molecule1 = Parser.Parse(File.ReadAllLines(filepath3));
-            //Molecule Molecule2 = Parser.Parse(File.ReadAllLines(filepath4));
-            //Molecule Molecule3 = Parser.Parse(File.ReadAllLines(filepath5));
-            //Molecule Molecule4 = Parser.Parse(File.ReadAllLines(filepath6));
-            //Molecule Molecule5 = Parser.Parse(File.ReadAllLines(filepath7));
+            // Calculate column widths
+            int nameColWidth = Math.Max("Molecule Name".Length, GetLongestStringLength(names));
+            int similarityColWidth = 30;  // Beacuse of the maximal decimal presicision is 28-29 digits
 
-            ////Create a new Generator
-            //FCFPGenerator Generator = new FCFPGenerator();
+            // Print headers
+            Console.WriteLine(new string('-', nameColWidth + similarityColWidth + 7));
+            Console.WriteLine($"| {"Molecule Name".PadRight(nameColWidth)} | {"Similarity Score".PadRight(similarityColWidth)} |");
+            Console.WriteLine(new string('-', nameColWidth + similarityColWidth + 7));
 
-            ////Convert both of the molecules into the BitArrays
-            //BitArray Hash1 = Generator.GenerateFcfp(Molecule1, 3, 1024);
-            //BitArray Hash2 = Generator.GenerateFcfp(Molecule2, 3, 1024);
-            //BitArray Hash3 = Generator.GenerateFcfp(Molecule3, 3, 1024);
-            //BitArray Hash4 = Generator.GenerateFcfp(Molecule4, 3, 1024);
-            //BitArray Hash5 = Generator.GenerateFcfp(Molecule5, 3, 1024);
+            // Print rows
+            for (int i = (names.Count - 1); i >= 0; i--)
+            {
+                Console.WriteLine($"| {names[i].PadRight(nameColWidth)} | {similarities[i].ToString("F12").PadRight(similarityColWidth)} |");
+            }
 
+            Console.WriteLine(new string('-', nameColWidth + similarityColWidth + 7));
+        }
 
-            ////Creare a new Similiarity Calculator
-            //SimilarityCalculator Measure = new SimilarityCalculator();
-
-            ////measure the similarity of the molecules
-            //double similarity1 = Measure.Tanimoto(Hash1, Hash1);
-            //Console.WriteLine("");
-            //Console.WriteLine(similarity1);
-
-            //double similarity2 = Measure.Tanimoto(Hash1, Hash2);
-            //Console.WriteLine("");
-            //Console.WriteLine(similarity2);
-
-            //double similarity3 = Measure.Tanimoto(Hash1, Hash3);
-            //Console.WriteLine("");
-            //Console.WriteLine(similarity3);
-
-            //double similarity4 = Measure.Tanimoto(Hash1, Hash4);
-            //Console.WriteLine("");
-            //Console.WriteLine(similarity4);
-
-            //double similarity5 = Measure.Tanimoto(Hash1, Hash5);
-            //Console.WriteLine("");
-            //Console.WriteLine(similarity5);
-
-            //LibraryReader Reader = new LibraryReader();
-            //Dictionary<string, BitArray> Results = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf", 2, 4096);
-            //Dictionary<string, BitArray> Results = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 4096);
-
-            //foreach (var key in Results.Keys) Console.WriteLine(key);
-
-            //var results = Reader.Read(filepath2, 2, 20);
-
-            //foreach (bool i in results["one"]) Console.WriteLine(i);
-
-            //string fileContent = File.ReadAllText("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf");
-            //Console.WriteLine(fileContent);
+        static int GetLongestStringLength(IEnumerable<string> strings)
+        {
+            int maxLength = 0;
+            foreach (var str in strings)
+            {
+                if (str.Length > maxLength)
+                {
+                    maxLength = str.Length;
+                }
+            }
+            return maxLength;
         }
     }
 }

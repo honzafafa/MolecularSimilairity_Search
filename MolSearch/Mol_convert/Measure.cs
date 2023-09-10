@@ -5,7 +5,7 @@ namespace MolMesure;
 
 public class SimilarityCalculator
 {
-    public double Tanimoto(BitArray fingerprint1, BitArray fingerprint2)
+    public decimal Tanimoto(BitArray fingerprint1, BitArray fingerprint2)
     {
         if (fingerprint1.Length != fingerprint2.Length)
         {
@@ -29,11 +29,11 @@ public class SimilarityCalculator
 
         if (union == 0)
         {
-            return 0.0;
+            return 0;
         }
         else
         {
-            return (double)intersection / union;
+            return (decimal)intersection / union;
         }
     }
 }

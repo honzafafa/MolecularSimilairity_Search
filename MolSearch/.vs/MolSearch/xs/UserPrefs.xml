@@ -1,30 +1,28 @@
 ﻿<Properties StartupConfiguration="{D2F3DCE9-844E-4C10-84F2-139D946CA52E}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Mol_convert/bin/Debug/net6.0/MolConvert.pdb">
+  <MonoDevelop.Ide.ItemProperties.MolSearch PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MolSearch/Program.cs">
     <Files>
-      <File FileName="MolSearch/Program.cs" Line="42" Column="43" />
-      <File FileName="Mol_convert/ConvertToType.cs" Line="143" Column="6" />
-      <File FileName="Mol_convert/bin/Debug/net6.0/MolConvert.pdb" />
+      <File FileName="MolSearch/Program.cs" Line="93" Column="13" />
+      <File FileName="Mol_convert/EmptyClass.cs" Line="34" Column="45" />
+      <File FileName="MolSearch/EmptyInterface.cs" Line="3" Column="1" />
+      <File FileName="Mol_convert/Measure.cs" Line="33" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MolSearch" expanded="True">
-            <Node name="MolConvert" expanded="True">
-              <Node name="ConvertToType.cs" selected="True" />
-            </Node>
-            <Node name="MolSearch" expanded="True">
-              <Node name="Dependencies" expanded="True" />
+            <Node name="MolSearch">
+              <Node name="Dependencies" expanded="True" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.MolSearch PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MultiItemStartupConfigurations />
 </Properties>
