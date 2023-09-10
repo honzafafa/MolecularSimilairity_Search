@@ -1,7 +1,7 @@
 ﻿// Molecular Similarity Search
 // Jan Faflík
 // Summer Semeter 2022/23
-// Progeramming 2 NPRG031
+// Programming 2 NPRG031
 
 using System;
 using System.Collections;
