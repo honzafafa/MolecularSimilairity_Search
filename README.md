@@ -12,6 +12,7 @@ The console app will then gude you throut the process, it will ask you to input 
 \
 You can of course you your own molecules and screening libraries (in the stadart sdf format) but please be sure you are comparing the same types of SDF file (for example some sdf file includes structurally uninportand hydrogens and some don't).\
 The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:\
+\
 THE TEST TARGET MOLECULES:
 ```
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf
@@ -25,7 +26,11 @@ THE TEST SCREENING LIBRARIES:
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/20230828-L1300-FDA-approved-Drug-Library.sdf
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/Approveddrugslibrary.sdf
 ```
-
+You shoul be able to determine your own path of where to save the full results of the screen. The should be saved in a TEXT FILE\
+\
+!! WARNING !! \
+the app doesn't check if the file you are writing to already exists so if it does, expect that it will completely rewrite it or at least alter it\
+\
 ## Genral description of the project that was followed during its development
 
 I am excited to propose my end-of-year project for the programming class, which focuses on developing a Chemical Structure Similarity Analysis Tool using Functional-Class Fingerprints (FCFP) and the Tanimoto coefficient as the similarity measure. The motivation behind this project is to create a tool that can be integrated into a virtual screening pipeline to help identify potential hits from a large compound library based on their similarity to known active compounds. This project aligns well with my interests in computational drug design.
