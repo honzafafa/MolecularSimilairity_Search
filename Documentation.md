@@ -7,7 +7,7 @@ cd /YOUR LOACTION/MolecularSimilairity_Search/MolSearch/MolSearch/bin/Debug/net6
 dotnet MolSearch.dll
 ```
 The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.\
-\
+
 ### All of the parameters imputed** 
 - radius of enviroment of each atom, used to generated is't type
 - length (nuber of bits) of the fingerprints calculated
