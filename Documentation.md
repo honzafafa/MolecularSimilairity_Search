@@ -1,4 +1,4 @@
-## USER DOCUMENTATION
+# USER DOCUMENTATION
 (this documentation assumes basic background knowledge in cheminformatics)
 
  To run the app in you command line (bash) is to run the following commands:
@@ -8,7 +8,7 @@ dotnet MolSearch.dll
 ```
 The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.\
 \
-**All of the parameters imputed** 
+### All of the parameters imputed** 
 - radius of enviroment of each atom, used to generated is't type
 - length (nuber of bits) of the fingerprints calculated
 - directory path to the target molecule
@@ -17,7 +17,6 @@ The console app will then gude you throut the process, it will ask you to input 
 \
 You can of course you your own molecules and screening libraries (in the stadart sdf format) but PLEASE be sure you are comparing the same types of SDF files (for example, some sdf files include structurally uninportand hydrogens and some don't).\
 The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:\
-
 **THE TEST TARGET MOLECULES:** 
 ```
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf
@@ -45,9 +44,8 @@ Key: "uniques identified of the screened molecule", Value: "Similary of target a
 
 **That should be everything necessary for standart usage of the program :)** 
 
-\
 
-## Developer documentation 
+# Developer documentation 
 (this documentation assumes that you have background knowledge in cheminformatics)
 
 
