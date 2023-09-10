@@ -1,3 +1,27 @@
+# DESCRIPTION OF THE PROJECT
+
+I am excited to present to you my end-of-year project for the programming class, which focuses on developing a Chemical Structure Similarity Analysis Tool using Functional-Class Fingerprints (FCFP) and the Tanimoto coefficient as the similarity measure. The motivation behind this project is to create a tool that can be integrated into a virtual screening pipeline to help identify potential hits from a large compound library based on their similarity to known active compounds. This project aligns well with my interests in computational drug design.
+
+**The primary goal of the project is to create a robust and user-friendly tool for performing chemical structure similarity analysis, of already approved drugs. So virtual screeing experiments centered about exploring similarity bewtween those drugs and theri groups can be conducted**
+
+### The main objectives of the project are:**
+
+- Develop a class to represent molecules, with properties and methods for storing and manipulating atomic information. Implement functionality for parsing input molecular structures from supported chemical file formats (e.g., SMILES or SDF).
+
+- Implement atom typing functionality to assign each atom in the molecule to a specific functional class based on its chemical properties and local environment.
+
+- Implement a method to generate a unique hash for each atom and its local environment within a specified radius, using a suitable hash function.
+
+- Develop functionality to construct the FCFP for each input molecule using the generated environment hashes.
+
+- Implement the Tanimoto coefficient as a simple similarity measure to compare the generated FCFP fingerprints.
+
+- Design a simple user interface to accept input molecular structures and FCFP parameters, initiate the analysis, and display the results in a clear and concise format.
+
+Upon completion of the project, the developed tool will be capable of processing and comparing molecular structures in standard chemical file formats, generating FCFP fingerprints for the input molecules, and calculating the similarity between them using the Tanimoto coefficient. The results will be presented in a clear and concise format, such as a similarity matrix or a list of similarity scores.
+
+In the context of a virtual screening pipeline, this tool could be used to identify potential hits from a large compound library by comparing their FCFP fingerprints to those of known active compounds. Compounds with high similarity scores can then be prioritized for experimental validation, potentially saving time and resources in the drug discovery process.
+
 # USER DOCUMENTATION
 (this documentation assumes basic background knowledge in cheminformatics)
 
