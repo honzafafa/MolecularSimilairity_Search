@@ -73,4 +73,8 @@ the row will be structured as:\
 # Developer documentation 
 (this documentation assumes that you have background knowledge in cheminformatics)
 
+**Please note that the algoritms implemented were choosen to accomodate the standarts in chemoinfomratics but parts of them we simplified for the possiblity of implemtning the program in timely manner**
+
+Here is a list of the parts that were simplified in comparision with the cheminformatics standart:
+- 
 
