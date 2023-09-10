@@ -11,7 +11,7 @@ dotnet MolSearch.dll
 The console app will then gude you throut the process, it will ask you to input necessary parameters for the fingerprint generation and that it will ask you for the path to the screened molecule, the screening library.\
 \
 You can of course you your own molecules and screening libraries (in the stadart sdf format) but please be sure you are comparing the same types of SDF file (for example some sdf file includes structurally uninportand hydrogens and some don't).\
-The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:
+The app has some testing data included in its desing in the case you would want to access those here are the paths to some of them:\
 THE TEST TARGET MOLECULES:
 ```
 /YOUR LOCATION/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf
