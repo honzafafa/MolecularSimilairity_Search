@@ -4,32 +4,34 @@ using System.Collections;
 
 namespace ConvertToHash;
 
+// Represents an atomic element with its neighbors.
 public class Atom
-// this class exists to store data about given atom
 {
     public string ElementType { get; set; }
     public List<Atom> Neighbors { get; set; } = new List<Atom>();
 
+    // Initializes a new instance of the Atom class with the specified element type.
     public Atom(string elementType)
     {
         ElementType = elementType;
 
     }
 
-    //this method is useful for adding infomration about given neighnout to an atom
+    // Adds a neighboring atom to the current atom's list of neighbors.
     public void AddNeighbour(Atom atom)
     {
         Neighbors.Add(atom);
     }
 }
 
+// Represents a bond between two atoms.
 public class Bond
-// this class exists to store data about given bond
 {
     public Atom Atom1 { get; set; }
     public Atom Atom2 { get; set; }
     public int BondType { get; set; }
 
+    // Initializes a new instance of the Bond class with specified atoms and bond type.
     public Bond(Atom atom1, Atom atom2, int bondType)
     {
         Atom1 = atom1;
@@ -38,35 +40,40 @@ public class Bond
     }
 }
 
+// Represents a molecular structure consisting of atoms and bonds.
 public class Molecule
-// this class exists to store data about given molecule
 {
     public List<Atom> Atoms { get; set; }
     public List<Bond> Bonds { get; set; }
 
+    // Initializes a new instance of the Molecule class.
     public Molecule()
     { 
         Atoms = new List<Atom>();
         Bonds = new List<Bond>();
     }
 
+    // Adds an atom to the molecule.
     public void AddAtom(Atom atom)
     {
         Atoms.Add(atom);
     }
 
+    // Adds a bond to the molecule.
     public void AddBond(Bond bond)
     {
         Bonds.Add(bond);
     }
 }
 
+// Provides functionality to parse SDF (Structure-Data File) format to Molecule objects.
 public class SdfParser
-// this class exist to parse sdf file into a class molecule
 {
+
+    // Parses the provided SDF lines into a Molecule object.
+    // It returns the parsed Molecule object.
     public Molecule Parse(string[] lines)
-    // this method exist to parse sdf file into a class molecule
-    // it returns the molecule object creating acording to the sdf file
+
     {
         Molecule molecule = new Molecule();
 
@@ -105,8 +112,10 @@ public class SdfParser
     }
 }
 
+// Provides functionality to generate FCFP (Functional Class FingerPrints) from a Molecule object.
 public class FCFPGenerator
 {
+    //  Generates the FCFP for a given molecule.
     public BitArray GenerateFcfp(Molecule molecule, int radius, int length)
     {
         BitArray fcfp = new BitArray(length);
@@ -127,9 +136,9 @@ public class FCFPGenerator
         return fcfp;
     }
 
+    // Determines the type of the atom based on its atomic symbol and bond types.
+    // returs the atom type descriptor string
     private string GetType(Atom atom, Molecule molecule)
-    // Determine basic atom type based on atomic symbol and bond types
-    // returs the atom type descriptor
     {
         int singleBondCount = molecule.Bonds.Count(b => (b.Atom1 == atom || b.Atom2 == atom) && b.BondType == 1);
         int doubleBondCount = molecule.Bonds.Count(b => (b.Atom1 == atom || b.Atom2 == atom) && b.BondType == 2);
@@ -147,6 +156,7 @@ public class FCFPGenerator
         return descriptor;
     }
 
+    // Retrieves the environment of the atom up to a specified radius.
     private List<Atom> GetEnvironment(Atom atom, int radius)
     {
         List<Atom> environment = new List<Atom>();
@@ -157,6 +167,7 @@ public class FCFPGenerator
         queue.Enqueue(atom);
         visited.Add(atom);
 
+        // Breadth-first search to explore the atom's environment
         while (queue.Count > 0 && currentRadius < radius)
         {
             int currentSize = queue.Count;
@@ -182,13 +193,13 @@ public class FCFPGenerator
         return environment;
     }
 
+    // Creates a string descriptor of the atoms in the environment.
     private string GetEnvironmentDescriptor(List<Atom> environment, Molecule molecule)
-    //This method creates a sorted descriptor of all the atoms in the atoms enviroment
     {
         // Sort the atoms by their types
         environment.Sort((a, b) => GetType(a, molecule).CompareTo(GetType(b, molecule)));
 
-        // Concatenate the atom types into a string
+        // Concatenate the atom types into a basic descriptor string
         StringBuilder descriptor = new StringBuilder();
         foreach (Atom atom in environment)
         {
@@ -199,8 +210,8 @@ public class FCFPGenerator
         return descriptor.ToString();
     }
 
+    // Computes a hash for a given input string using SHA256.
     private int GetHash(string input)
-    //This method uses the SHA256 cryptographic method to Hast the atom types
     {
         using (SHA256 sha256 = SHA256.Create())
         {

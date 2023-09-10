@@ -1,44 +1,37 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using ConvertToHash;
 using Test;
 using MolMesure;
 using LibraryProcessor;
 using Interace;
-using System.Threading.Tasks;
-using System.Reflection.Emit;
 using System.Data;
-using System.Diagnostics.Metrics;
 
 namespace Solution
 {
     class Program
     {
+        // Entry point of the application.
+        // This method initializes the application interface, reads molecular libraries, calculates similarities, and outputs the results.
         static void Main(string[] args)
         {
-
+            // Initialize and start the application interface
             ApplicationInterface appInterface = new ApplicationInterface();
-            //appInterface.Start();
+            appInterface.Start();
             Console.WriteLine("\nProcessing... Please wait.");
             Console.WriteLine("------------------------------------------------");
 
+            // Read target molecule and molecular library
             LibraryReader Reader = new LibraryReader();
 
-            //Dictionary<string, BitArray> target = Reader.Read(appInterface.TargetPath, appInterface.Radius, appInterface.Length);
-            Dictionary<string, BitArray> target = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 1024);
+            Dictionary<string, BitArray> target = Reader.Read(appInterface.TargetPath, appInterface.Radius, appInterface.Length);
             string targetKey = target.Keys.First();
 
-            //Dictionary<string, BitArray> library = Reader.Read(appInterface.LibraryPath, appInterface.Radius, appInterface.Length);
-            Dictionary<string, BitArray> library = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/LIBRARIES/20200113-L1300-FDA-approved-Drug-Library.sdf", 2, 1024);
-            //Dictionary<string, BitArray> library = Reader.Read("/Users/faflik/Projects/C#/MolecularSimilairity_Search/TEST_DATA/MOLECULES/IGALMI.sdf", 2, 1024);
-            string targetPath = "/Users/faflik/Desktop/Results1.txt";
+            Dictionary<string, BitArray> library = Reader.Read(appInterface.LibraryPath, appInterface.Radius, appInterface.Length);
 
             //Visuals
-            Console.WriteLine("------------------------------------------------");
             Console.WriteLine();
 
+            // Calculate similarities between target molecule and each molecule in the library
             SimilarityCalculator Measure = new SimilarityCalculator();
 
             Dictionary<string, decimal> measurments = new Dictionary<string, decimal>();
@@ -49,11 +42,12 @@ namespace Solution
                 measurments[currentKey] = similarity;
             }
 
+            // Write the similarity measurements to a file and prepare data for table display
             int numMolecules = measurments.Keys.Count;
             List<string> namesToPresent = new List<string>();
             List<decimal> measurmetsToPresent = new List<decimal>();
 
-            using (StreamWriter writer = new StreamWriter(targetPath))
+            using (StreamWriter writer = new StreamWriter(appInterface.ResultsPath))
             {
                 foreach (KeyValuePair<string, decimal> measurment in measurments.OrderBy(key => key.Value))
                 {
@@ -70,16 +64,10 @@ namespace Solution
                 }
             }
 
-            //Present the results
-
-            //for (int i = (measurmetsToPresent.Count - 1); i >= 0; i--)
-            //{
-            //    Console.WriteLine("Key: {0}, Value: {1}", namesToPresent[i], measurmetsToPresent[i]);
-            //}
-
             DisplayTable(namesToPresent, measurmetsToPresent);
         }
 
+        // Display a table with the top 10 most similar molecules
         static void DisplayTable(List<string> names, List<decimal> similarities)
         {
 
@@ -101,6 +89,8 @@ namespace Solution
             Console.WriteLine(new string('-', nameColWidth + similarityColWidth + 7));
         }
 
+        // Determines the length of the longest string in a collection of strings.
+        // Returns the length of the longest string.
         static int GetLongestStringLength(IEnumerable<string> strings)
         {
             int maxLength = 0;

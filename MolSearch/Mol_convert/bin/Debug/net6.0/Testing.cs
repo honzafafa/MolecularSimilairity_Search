@@ -2,11 +2,14 @@
 
 namespace Test;
 
+// !! THIS NAMESPACE IS USED ONLY FOR DEBUGGING PURPOSES !!
+// This fiele is redundant but could be useful for futher modification
+
+// Provides functionality to print the contents of a file to the console.
 class ReadFile
-//Class exists for dedugging purposes
 {
+    // Prints the contents of the specified file to the console.
     public void Print(string filepath)
-    // this method prints out given file
     {
         string[] lines = File.ReadAllLines(filepath);
 
@@ -15,18 +18,14 @@ class ReadFile
     }
 }
 
+// Provides functionality to print details of a parsed molecule object to the console. 
 public class PrintMolecule
-//Class exists for dedugging purposes
-// it exists to print out infomration about created molecule objects
 {
     public int numAtoms { get; set; }
     public int numBonds { get; set; }
 
-
+    //Parses the molecule from a file, prints the atom symbols and bond types, and returns the counts of atoms and bonds.
     public int[] PrintMol(string filepath)
-    // this method returns int[] with numeber of atoms and bonds in the molecules,
-    // it also pritns out the symbols of all of the atoms and types of all the bonds
-    // It exists only for debugging purposes
     {
         SdfParser Parser = new SdfParser();
         Molecule PrintMol = Parser.Parse(File.ReadAllLines(filepath));
