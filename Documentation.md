@@ -79,4 +79,89 @@ Here is a list of the parts that were simplified in comparision with the cheminf
 - the basic atom typing functionality:
    - In Standart FCFP generation programmes, atom typing capabilites include charge, bond hybridization, functional groups and etc... I have choosed to no include those in my atom typing algoritm for following reason: These atomy typing cabalities are apply to many specifi case and many edge cases becouse of that they could be implemnted as extemetly lage switch so implememnting them would really be coding challenge but a date entry challenge, and so I don't think implementing them would be meaningful for the purpose of this project.
    - I have implemeted the atom typing capability in a simpleifed manned where I take into account only the type of element and the types and count of bonds connected to it. This cactures mostly the structuraly similarities between molecules which is sufficuent for this project.
+ 
+ Now I will proceed in domcumenting each of the modules present in this app, here is the list of them with decription which should be sufficient for uderstanding of the expert user.\
+The program has 2 parts, main part and accomdading libries, in this list I don't distinguish in betweend them and list all of the modules on individual file level of abstaction:
+## 1. Program.cs
+
+## 2. Inteface.cs
+## 3. ConvertToType.cs
+### Programmer Documentation for `ConvertToHash` namespace
+
+---
+
+### Overview:
+
+This namespace, `ConvertToHash`, provides functionality to represent and manipulate molecular structures. It allows the parsing of molecular data from SDF (Structure-Data File) format into a more structured `Molecule` representation. Additionally, it offers a mechanism to generate Functional Class FingerPrints (FCFP) for a given molecule, which can be useful for molecular similarity comparisons.
+
+---
+
+### Dependencies:
+
+- System.Text
+- System.Security.Cryptography
+- System.Collections
+
+---
+
+### Classes:
+
+#### 1. Atom
+
+- **Purpose**: Represents an atomic element and its neighbors in a molecular structure.
+- **Properties**:
+  - `ElementType`: The type or symbol of the atom.
+  - `Neighbors`: List of neighboring atoms.
+- **Methods**:
+  - `AddNeighbour(Atom atom)`: Adds a neighboring atom to the current atom's list of neighbors.
+
+#### 2. Bond
+
+- **Purpose**: Represents a bond between two atoms.
+- **Properties**:
+  - `Atom1`: The first atom in the bond.
+  - `Atom2`: The second atom in the bond.
+  - `BondType`: Integer representing the type of the bond.
+- **Constructor**:
+  - `Bond(Atom atom1, Atom atom2, int bondType)`: Initializes the bond with two atoms and a bond type.
+
+#### 3. Molecule
+
+- **Purpose**: Represents a molecular structure comprising of atoms and bonds.
+- **Properties**:
+  - `Atoms`: List of atoms in the molecule.
+  - `Bonds`: List of bonds in the molecule.
+- **Methods**:
+  - `AddAtom(Atom atom)`: Adds an atom to the molecule.
+  - `AddBond(Bond bond)`: Adds a bond to the molecule.
+
+#### 4. SdfParser
+
+- **Purpose**: Provides functionality to parse SDF (Structure-Data File) formatted data into a `Molecule` object.
+- **Methods**:
+  - `Parse(string[] lines)`: Parses an array of strings (representing lines from an SDF file) into a `Molecule` object.
+
+#### 5. FCFPGenerator
+
+- **Purpose**: Generates Functional Class FingerPrints (FCFP) for a given molecule.
+- **Methods**:
+  - `GenerateFcfp(Molecule molecule, int radius, int length)`: Generates the FCFP for a given molecule based on the specified radius and length.
+  - `GetType(Atom atom, Molecule molecule)`: Determines the type of an atom based on its atomic symbol and bond types.
+  - `GetEnvironment(Atom atom, int radius)`: Retrieves the environment of an atom up to a specified radius.
+  - `GetEnvironmentDescriptor(List<Atom> environment, Molecule molecule)`: Creates a string descriptor for the atoms in a given environment.
+  - `GetHash(string input)`: Computes a hash value for a given input string using the SHA256 hashing algorithm.
+
+---
+
+### Usage Notes:
+
+1. To read SDF formatted data and convert it into a `Molecule` object, instantiate the `SdfParser` class and use the `Parse` method.
+2. To generate Functional Class FingerPrints (FCFP) for a molecule, instantiate the `FCFPGenerator` class and use the `GenerateFcfp` method with the desired radius and length.
+3. The `BondType` in the `Bond` class can be used to differentiate between single, double, and triple bonds. Adjustments can be made to accommodate other bond types if necessary.
+
+---
+## 4. Measure.cs
+## 5. ParseLibrary.cs
+## 6. Testing.cs
+All of the files are conected in stdart way on the level of individual name spaces.
 
