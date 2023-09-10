@@ -57,7 +57,7 @@ The app has some testing data included in its desing in the case you would want 
 ```
 You shoul be able to determine your own path of where to save the full results of the screen. The should be saved in a TEXT FILE\
 \
-**!! WARNING !! \**
+**!! WARNING !!**\
 the app doesn't check if the file you are writing to already exists so if it does, expect that it will completely rewrite it or at least alter it\
 
 ### Form of the results 
