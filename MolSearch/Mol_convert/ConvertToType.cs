@@ -203,7 +203,7 @@ public class FCFPGenerator
         StringBuilder descriptor = new StringBuilder();
         foreach (Atom atom in environment)
         {
-            descriptor.Append(atom.GetType());
+            descriptor.Append(GetType(atom, molecule));
             descriptor.Append('-');
         }
 

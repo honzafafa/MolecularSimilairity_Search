@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{D2F3DCE9-844E-4C10-84F2-139D946CA52E}|Default">
   <MonoDevelop.Ide.ItemProperties.MolSearch PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MolSearch/Program.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Mol_convert/ConvertToType.cs">
     <Files>
       <File FileName="MolSearch/Program.cs" Line="10" Column="24" />
-      <File FileName="MolSearch/Interface.cs" />
-      <File FileName="Mol_convert/ConvertToType.cs" />
+      <File FileName="MolSearch/Interface.cs" Line="1" Column="1" />
+      <File FileName="Mol_convert/ConvertToType.cs" Line="189" Column="1" />
       <File FileName="Mol_convert/Measure.cs" />
       <File FileName="Mol_convert/ParseLibrary.cs" />
       <File FileName="Mol_convert/Testing.cs" />
@@ -13,19 +14,18 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MolSearch">
-            <Node name="MolConvert" expanded="True" />
-            <Node name="MolSearch">
-              <Node name="Program.cs" selected="True" />
+            <Node name="MolConvert" expanded="True">
+              <Node name="ConvertToType.cs" selected="True" />
             </Node>
+            <Node name="MolSearch" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>
